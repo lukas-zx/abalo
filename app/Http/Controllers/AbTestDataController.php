@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class AbTestDataController extends Controller
 {
+
     public function getTestdata() {
         $testdata = AbTestData::select('id', 'ab_testname')
             ->orderBy('id', 'asc')
