@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-createElement</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let form = document.createElement('form');
+    form.setAttribute('action', 'none');
+    form.setAttribute('method', 'get');
+    form.setAttribute('name', 'Formular');
+
+    let text = document.createElement('input');
+    text.setAttribute('type', 'text');
+    text.setAttribute('id', 'text');
+    text.setAttribute('name', 'text');
+
+    let select = document.createElement('select');
+    select.setAttribute('name', 'select');
+    select.setAttribute('id', 'select');
+
+    let option1 = document.createElement('option');
+    option1.setAttribute('value', '1');
+    option1.innerText = '1';
+
+    let option2 = document.createElement('option');
+    option2.setAttribute('value', '2');
+    option2.innerText = '2';
+
+    select.appendChild(option1);
+    select.appendChild(option2);
+
+    form.appendChild(text);
+    form.appendChild(select);
+
+    document.body.appendChild(form);
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timeout</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let button = document.createElement('button');
+    button.setAttribute('id', 'button');
+    button.innerText = 'Farbe wechseln';
+    button.style.background = 'white';
+    document.body.appendChild(button);
+
+    window.setInterval(function() {
+        if (button.style.background === 'white') button.style.background = 'red';
+        else button.style.background = 'white';
+    }, 1000)
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-Browser</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let name = window.navigator.userAgent;
+    console.log(name);
+    let start = name.lastIndexOf(' ') + 1;
+    let end = name.lastIndexOf('/');
+    name = name.substring(start, end);
+    console.log(name);
+</script>
+</body>
+</html>

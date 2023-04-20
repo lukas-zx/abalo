@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-Overlay</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let overlay = document.createElement('div');
+    overlay.setAttribute('name', 'overlay');
+    overlay.style.position = 'absolute';
+    overlay.style.bottom = '0px';
+    overlay.style.width = '100%';
+    overlay.style.height = '20%';
+    overlay.style.background = 'blue';
+    overlay.innerText = 'Unten am Bildschirm';
+    document.body.appendChild(overlay);
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-get</title>
+</head>
+<body>
+<h1 class="headline">H1</h1>
+<h2 id="h2">H2</h2>
+<p>P</p>
+<button name="knopf">test</button>
+<script>
+    "use strict";
+    document.getElementById('h2').innerHTML = '<h3>H3</h3>';
+    document.getElementsByClassName('headline')[0].innerText = 'H1 bearbeitet';
+    document.getElementsByTagName('p')[0].innerText = 'P bearbeitet';
+    document.getElementsByName('knopf')[0].innerText = 'button bearbeitet';
+</script>
+</body>
+</html>

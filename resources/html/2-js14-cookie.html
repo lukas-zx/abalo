@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie</title>
+</head>
+<body>
+<script>
+    "use strict";
+    function findCookie(name) {
+        let found = false;
+
+        // decode cookies, make array of all cookies
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let cookies = decodedCookie.split(';');
+
+        // find the requested cookie and return its index
+        cookies.forEach(function(value, index) {
+            value = value.trim();
+            if(value.indexOf(name) === 0) {
+                found = value;
+            }
+        })
+        return found;
+    }
+
+    if (findCookie('counter') === false) {
+        document.cookie = 'counter=0';
+    } else {
+        let counter = findCookie('counter');
+        let start = counter.lastIndexOf('=') + 1;
+        counter = Number(counter.substring(start, counter.length));
+        counter++;
+        document.cookie = 'counter=' + counter;
+    }
+
+    console.log(findCookie('counter'));
+
+</script>
+</body>
+</html>

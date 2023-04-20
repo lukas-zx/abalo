@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objekte</title>
+</head>
+<body>
+<script>
+    "use strict";
+    let Car_json = {
+        name: 'Max',
+        type: 'Mustermann',
+        getName: function() {
+            return this.name;
+        },
+        getType: function() {
+            return this.type;
+        },
+        setName: function(name) {
+            this.name = name;
+        },
+        setType: function(type) {
+            this.type = type;
+        },
+        writeToConsole: function() {
+            console.log('name=' + this.name + ', type=' + this.type);
+        }
+    };
+
+    let car_json = Object.create(Car_json);
+    car_json.setName('json');
+    car_json.setType('1');
+    console.log(car_json);
+
+    function Car_function (name, type) {
+        this.name = name;
+        this.type = type;
+        this.getName = function() {
+            return this.name;
+        }
+        this.getType = function() {
+            return this.type;
+        }
+        this.setName = function(name) {
+            this.name = name;
+        }
+        this.setType = function(type) {
+            this.type = type;
+        }
+        this.writeToConsole = function() {
+            console.log('name=' + this.name + ', type=' + this.type);
+        }
+    }
+
+    let car_function = new Car_function('function', '2');
+    console.log(car_function);
+
+    class Car_class {
+        constructor(name, type) {
+            this.name = name;
+            this.type = type;
+        }
+        getName() {
+            return this.name;
+        }
+        getType() {
+            return this.type;
+        }
+        setName(name) {
+            this.name = name;
+        }
+        setType(type) {
+            this.type = type;
+        }
+        writeToConsole() {
+            console.log('name=' + this.name + 'type=' + this.type);
+        }
+    }
+
+    let car_class = new Car_class('class', '3');
+    console.log(car_class);
+
+</script>
+</body>
+</html>
