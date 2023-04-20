@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Models\AbArticle;
 use Illuminate\Support\Facades\DB;
+use JetBrains\PhpStorm\NoReturn;
+use function Webmozart\Assert\Tests\StaticAnalysis\length;
 
 class AbArticleController extends Controller
 {
@@ -34,5 +37,39 @@ class AbArticleController extends Controller
         ];
 
         return view('articles', $data);
+    }
+
+    public function newArticle() {
+        return view('newarticle');
+    }
+
+    #[NoReturn] public function add(Request $request) {
+        $name = $request['name'];
+        $price = $request['price'];
+        $description = $request['description'];
+        $creatorid = 1;
+        $createdate = date('Y-m-d H:i:s');
+        //$createdate = time();
+        $errormessage = null;
+
+        if ($name === null) $errormessage = 'Artikel muss einen Namen haben';
+        if (strlen($name) > 80) $errormessage = 'Name darf nicht mehr als 80 Zeichen haben';
+        if ($price === null) $errormessage = 'Artikel muss einen Preis haben';
+        if ($price <= 0) $errormessage = 'Preis muss größer 0 sein';
+        if ($description === null) $errormessage = 'Artikel muss eine Beschreibung haben';
+        if (strlen($description) > 1000) $errormessage = 'Beschreibung darf nicht mehr als 1000 Zeichen haben';
+
+        if ($errormessage !== null) {
+            print_r($errormessage);
+        } else {
+            if (!DB::table('ab_article')
+                ->insert([
+                    'ab_name' => $name,
+                    'ab_price' => $price,
+                    'ab_description' => $description,
+                    'ab_creator_id' => $creatorid,
+                    'ab_createdate' => $createdate
+                ])) print_r('Fehler beim Einfügen in die Datenbank');
+        }
     }
 }

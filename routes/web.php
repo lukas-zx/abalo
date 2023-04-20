@@ -21,4 +21,7 @@ Route::get('/login', [App\Http\Controllers\AuthController::class, 'login'])->nam
 Route::get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/isloggedin', [App\Http\Controllers\AuthController::class, 'isloggedin'])->name('haslogin');
 
-Route::get('/article', [\App\Http\Controllers\AbArticleController::class, 'search']);
+//Route::get('/article', [\App\Http\Controllers\AbArticleController::class, 'search']);
+Route::post('/article', 'App\Http\Controllers\AbArticleController@add');
+
+Route::get('/newarticle', [\App\Http\Controllers\AbArticleController::class, 'newArticle']);

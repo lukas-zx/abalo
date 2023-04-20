@@ -44,7 +44,7 @@ class DevelopmentData extends Seeder
         foreach ($users as $user) {
             DB::table('ab_user')
                 ->insert([
-                    'id' => $user['id'],
+                    //'id' => $user['id'],
                     'ab_name' => $user['ab_name'],
                     'ab_password' => $user['ab_password'],
                     'ab_mail' => $user['ab_mail']
@@ -84,7 +84,7 @@ class DevelopmentData extends Seeder
         foreach ($articles as $article) {
             DB::table('ab_article')
                 ->insert([
-                    'id' => $article['id'],
+                    //'id' => $article['id'],
                     'ab_name' => $article['ab_name'],
                     'ab_price' => $article['ab_price'],
                     'ab_description' => $article['ab_description'],
@@ -124,7 +124,7 @@ class DevelopmentData extends Seeder
         foreach ($categories as $category) {
             DB::table('ab_articlecategory')
                 ->insert([
-                    'id' => $category['id'],
+                    //'id' => $category['id'],
                     'ab_name' => $category['ab_name'],
                     'ab_parent' => $category['ab_parent'],
                 ]);
