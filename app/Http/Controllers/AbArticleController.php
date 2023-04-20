@@ -31,9 +31,8 @@ class AbArticleController extends Controller
             }
         }
 
-
         $data = [
-            'articles' => $articles
+            'articles' => $articles,
         ];
 
         return view('articles', $data);

@@ -5,6 +5,9 @@
     <title>Artikelübersicht</title>
 </head>
 <body>
+<h1>Warenkorb</h1>
+<p id="p_cart"></p>
+<h1>Artikelübersicht</h1>
 <table>
     <thead>
     <tr>
@@ -14,6 +17,7 @@
         <td>Creator ID</td>
         <td>Create Date</td>
         <td>Image</td>
+        <td>Warenkorb</td>
     </tr>
     </thead>
     <tbody>
@@ -27,9 +31,11 @@
             <td>
                 <img src="{{ $article['ab_image'] }}" alt="{{ $article['ab_image'] }}" width="100px" height="50px">
             </td>
+            <td><button class="addToCart" id="{{ $article['ab_name'] }}">+</button></td>
         </tr>
     @endforeach
     </tbody>
 </table>
+<script src="{{ asset('/js/cart.js') }}"></script>
 </body>
 </html>
