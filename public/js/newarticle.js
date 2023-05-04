@@ -46,10 +46,51 @@ submit.addEventListener('click', function() {
     if (price.value <= 0) {
         alert('Preis muss > 0 sein')
     } else {
-        form.submit();
-        document.getElementById('form').submit();
+        let name = document.getElementById('name').value;
+        let price = document.getElementById('price').value;
+        let description = document.getElementById('description').value;
+
+
+       // event.preventDefault();
+        let data = [name, price, description];
+        sendData(data);
+
+
+        return false;
     }
-})
+
+});
+function sendData(data){
+    debugger;
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','/article', true);
+
+// Handle Webserver Response
+
+    let formData = new FormData();
+    formData.append("name", data[0]);
+    formData.append("price", data[1]);
+    formData.append("description", data[2]);
+
+    xhr.send(formData);
+
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState===4){
+            if(xhr.status===200){
+                let text=document.createElement('p')
+                text.innerText='Erfolgreich';
+                form.appendChild(text);
+
+            }else{
+                let text=document.createElement('p')
+                text.innerText='Fehler';
+                form.appendChild(text);
+
+            }
+        }
+
+    }
+}
 
 form.appendChild(nameLabel);
 form.appendChild(name);
@@ -60,3 +101,5 @@ form.appendChild(description);
 form.appendChild(submit);
 
 document.body.appendChild(form);
+
+

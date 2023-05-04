@@ -6,6 +6,6 @@
 </head>
 <body>
 <script src="{{ asset('/js/newarticle.js') }}"></script>
-<?php //var_dump($name); ?>
+
 </body>
 </html>

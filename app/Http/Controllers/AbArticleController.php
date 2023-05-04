@@ -48,7 +48,6 @@ class AbArticleController extends Controller
         $description = $request['description'];
         $creatorid = 1;
         $createdate = date('Y-m-d H:i:s');
-        //$createdate = time();
         $errormessage = null;
 
         if ($name === null) $errormessage = 'Artikel muss einen Namen haben';

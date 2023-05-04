@@ -25,3 +25,6 @@ Route::get('/article', [\App\Http\Controllers\AbArticleController::class, 'searc
 Route::post('/article', 'App\Http\Controllers\AbArticleController@add');
 
 Route::get('/newarticle', [\App\Http\Controllers\AbArticleController::class, 'newArticle']);
+
+Route::view('/3-ajax1-static', '3-ajax1-static' );
+Route::view('/3-ajax2-periodic', '/3-ajax2-periodic' );
