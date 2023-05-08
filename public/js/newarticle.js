@@ -50,22 +50,17 @@ submit.addEventListener('click', function() {
         let price = document.getElementById('price').value;
         let description = document.getElementById('description').value;
 
-
-       // event.preventDefault();
+        event.preventDefault();
         let data = [name, price, description];
         sendData(data);
-
 
         return false;
     }
 
 });
 function sendData(data){
-    debugger;
     let xhr = new XMLHttpRequest();
     xhr.open('POST','/article', true);
-
-// Handle Webserver Response
 
     let formData = new FormData();
     formData.append("name", data[0]);
@@ -74,21 +69,16 @@ function sendData(data){
 
     xhr.send(formData);
 
-    xhr.onreadystatechange=function(){
-        if(xhr.readyState===4){
-            if(xhr.status===200){
-                let text=document.createElement('p')
-                text.innerText='Erfolgreich';
-                form.appendChild(text);
-
-            }else{
-                let text=document.createElement('p')
-                text.innerText='Fehler';
-                form.appendChild(text);
-
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4) {
+            let responsetext = document.createElement('p')
+            if (xhr.status === 200) {
+                responsetext.innerText = 'Erfolgreich';
+            } else {
+                responsetext.innerText = 'Fehler: ' + xhr.status + ' ' + xhr.statusText;
             }
+            form.appendChild(responsetext);
         }
-
     }
 }
 
@@ -101,5 +91,3 @@ form.appendChild(description);
 form.appendChild(submit);
 
 document.body.appendChild(form);
-
-

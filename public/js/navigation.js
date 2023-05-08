@@ -4,9 +4,10 @@ let navElements = [
     ['Verkaufen', null],
     ['Unternehmen', ['Philosophie', 'Karriere']]
 ];
-function navigation (navelements){
-
+function Navigation(navelements) {
     this.navelements = navelements;
+
+    // print the navigation as an html unordered list
     this.printNav = function(){
         let nav = document.createElement('ul');
         this.navelements.forEach(function(value, key) {
@@ -26,16 +27,50 @@ function navigation (navelements){
             }
         });
         document.getElementById('nav').appendChild(nav);
-
     };
-    this.addElement = function(name){
 
-        let array = [name, null];
-        this.navelements.push(array);
-
+    // add an element to the end of the navigation
+    this.append = function(name) {
+        let item = [name, null];
+        this.navelements.push(item);
     }
-};
-let nav= new navigation(navElements);
-nav.addElement('Home');
-nav.printNav();
 
+    // add an element to the navigation at the given postion (starts with 1)
+    this.add = function(position, name) {
+        let item = [name, null];
+        this.navelements.splice(position - 1, 0, item);
+    }
+
+    // remove an element from the navigation
+    this.remove = function(element) {
+        let index = -1;
+        this.navelements.forEach(function(value, key) {
+            if (value[0] === element) navelements.splice(navelements.indexOf(value), 1);
+        })
+    }
+
+    // add a child to an element in the nav
+    this.addChild = function(parent, child) {
+        this.navelements.forEach(function(value, key) {
+            if (value[0] === parent) {
+                if (value[1] === null) value[1] = [child];
+                else value[1].append(child);
+            }
+        })
+    }
+
+    // remove a child from an element in the nav
+    this.removeChild = function(parent, child) {
+        this.navelements.forEach(function(value, key) {
+            if (value[0] === parent) value[1].splice(value[1].indexOf(child), 1);
+        })
+    }
+}
+
+let nav = new Navigation(navElements);
+nav.append('Impressum');
+nav.add(1, 'Test');
+nav.remove('Home');
+nav.addChild('Kategorien', 'Spielzeug');
+nav.removeChild('Unternehmen', 'Philosophie')
+nav.printNav();
