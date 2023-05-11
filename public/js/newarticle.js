@@ -52,7 +52,7 @@ submit.addEventListener('click', function() {
 
         event.preventDefault();
         let data = [name, price, description];
-        sendData(data);
+        sendData_api(data);
 
         return false;
     }
@@ -61,6 +61,31 @@ submit.addEventListener('click', function() {
 function sendData(data){
     let xhr = new XMLHttpRequest();
     xhr.open('POST','/article', true);
+
+    let formData = new FormData();
+    formData.append("name", data[0]);
+    formData.append("price", data[1]);
+    formData.append("description", data[2]);
+
+    xhr.send(formData);
+
+    xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4) {
+            let responsetext = document.createElement('p')
+            if (xhr.status === 200) {
+                responsetext.innerText = 'Erfolgreich';
+            } else {
+                responsetext.innerText = 'Fehler: ' + xhr.status + ' ' + xhr.statusText;
+            }
+            form.appendChild(responsetext);
+        }
+    }
+}
+function sendData_api(data){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST','/api/article', true);
+    //xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Accept', 'application/json');
 
     let formData = new FormData();
     formData.append("name", data[0]);
