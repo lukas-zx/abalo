@@ -1,3 +1,4 @@
+"use strict";
 function findCookie(name) {
     let cookievalue = null;
 

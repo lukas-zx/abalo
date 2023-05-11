@@ -1,3 +1,4 @@
+"use strict";
 let navElements = [
     ['Home', null],
     ['Kategorien', null],

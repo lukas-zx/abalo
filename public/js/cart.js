@@ -1,3 +1,4 @@
+"use strict";
 function clearCartDisplay() {
     let p_cart = document.getElementById('p_cart');
     if (p_cart.hasChildNodes()) {
