@@ -1,1 +1,0 @@
-curl -X POST http://localhost/api/article -H "Accept: application/json" -H "Content-Type: application/json" -d {"name": "Test", "price":"234", "description":"test"}

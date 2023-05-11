@@ -31,7 +31,7 @@
             <td>
                 <img src="{{ $article['ab_image'] }}" alt="{{ $article['ab_image'] }}" width="100px" height="50px">
             </td>
-            <td><button class="addToCart" id="{{ $article['ab_name'] }}">+</button></td>
+            <td><button class="addToCart" id="{{ $article['id'] }}">+</button></td>
         </tr>
     @endforeach
     </tbody>

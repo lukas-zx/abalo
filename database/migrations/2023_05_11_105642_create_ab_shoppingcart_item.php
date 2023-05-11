@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('ab_shoppingcart_item', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('ab_shoppingcart_id')->constrained('ab_shoppingcart', 'id');
+            $table->foreignId('ab_shoppingcart_id')->constrained('ab_shoppingcart', 'id')->onDelete('cascade');
+            $table->foreignId('ab_article_id')->constrained('ab_article', 'id');
             $table->timestamp('ab_createdate');
         });
     }

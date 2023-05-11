@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/article', [\App\Http\Controllers\AbArticleController::class, 'search_api']);
 Route::post('/article', [\App\Http\Controllers\AbArticleController::class, 'addArticle_api']);
+
+Route::post('/shoppingcart', [\App\Http\Controllers\AbShoppingcartController::class, 'addItem_api']);
+Route::delete('/shoppingcart/{shoppingcartid}/articles/{articleid}', [\App\Http\Controllers\AbShoppingcartController::class, 'deleteItem_api']);
+Route::get('/shoppingcart', [\App\Http\Controllers\AbShoppingcartController::class, 'getItems_api']);
