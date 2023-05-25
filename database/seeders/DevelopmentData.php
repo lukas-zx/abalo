@@ -129,5 +129,36 @@ class DevelopmentData extends Seeder
                     'ab_parent' => $category['ab_parent'],
                 ]);
         }
+
+        $file = fopen(resource_path('/article_has_articlecategory.csv'), 'r');
+        if (!$file) {
+            die("error");
+        }
+
+        $article_has_articlecategory = array(
+            'ab_articlecategory_id' => 0,
+            'ab_article_id' => 0
+        );
+        $articles_have_articlecategories = [];
+
+        // remove header
+        $firstline = fgetcsv($file, 1000, ';');
+
+        while(($line = fgetcsv($file, 1000, ';')) !== false) {
+            $felder = count($line);
+            $article_has_articlecategory['ab_articlecategory_id'] = $line[0];
+            $article_has_articlecategory['ab_article_id'] = $line[1];
+            $articles_have_articlecategories[] = $article_has_articlecategory;
+        }
+        fclose($file);
+
+        foreach ($articles_have_articlecategories as $article_has_articlecategory) {
+            DB::table('ab_article_has_articlecategory')
+                ->insert([
+                    'ab_articlecategory_id' => $article_has_articlecategory['ab_articlecategory_id'],
+                    'ab_article_id' => $article_has_articlecategory['ab_article_id'],
+                ]);
+        }
+
     }
 }

@@ -75,9 +75,17 @@ class AbArticleController extends Controller
         $article = $request['search'];
         $article = strtolower($article);
         $article = '%' . $article . '%';
-        $articles = AbArticle::select()
-            ->where('ab_name', 'ilike', $article)
-            ->get();
+        if (isset($request['limit'])) {
+            $articles = AbArticle::select()
+                ->where('ab_name', 'ilike', $article)
+                ->limit($request['limit'])
+                ->get();
+        } else {
+            $articles = AbArticle::select()
+                ->where('ab_name', 'ilike', $article)
+                ->get();
+        }
+
 
         foreach ($articles as $article) {
             $article['ab_image'] = 'no image';

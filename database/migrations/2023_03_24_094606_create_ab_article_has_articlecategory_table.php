@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('ab_article_has_articlecategory', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('ab_articlecategory_id')->unique()->constrained('ab_articlecategory');
+            $table->foreignId('ab_articlecategory_id')->constrained('ab_articlecategory');
             $table->foreignId('ab_article_id')->unique()->constrained('ab_article');
         });
     }

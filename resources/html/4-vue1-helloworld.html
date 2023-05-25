@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Abalo/node_modules/vue.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    {{ msg }}
+</div>
+<script>
+    let appdata = {
+        msg: 'Hallo Welt'
+    };
+    let vm = Vue.createApp({
+        data() {
+            return appdata;
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>
