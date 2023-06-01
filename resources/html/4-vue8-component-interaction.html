@@ -1,0 +1,45 @@
+<!-- Nicht fertig -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+
+<div id="app">
+
+<button id="1" v-on:click="handleClick">Element klicken</button>
+</div>
+
+<script type="module">
+
+    Vue.createApp({
+
+        methods:{
+            a: function(id){
+                return console.log('a aufgerufen');
+            },
+        }
+    }).mount('#app')
+</script>
+<script type="module">
+    Vue.createApp({
+
+        props:['id'],
+        emits: ['clicked-item'],
+        methods:{
+            handleClick: function(){
+                console.log('b aufgerufen');
+                this.$emit('clicked-item', this.id);
+            }
+        },
+        template:`<button id="1" v-on:click="handleClick">Element klicken</button>`
+    })
+
+</script>
+</body>
+</html>

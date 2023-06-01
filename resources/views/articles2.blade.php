@@ -37,5 +37,6 @@
     </tbody>
 </table>
 <script src="{{ asset('/js/cart.js') }}"></script>
+
 </body>
 </html>

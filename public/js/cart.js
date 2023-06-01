@@ -5,7 +5,6 @@ function clearCartDisplay() {
         p_cart.removeChild(p_cart.firstChild);
     }
 }
-
 function createCartTable() {
     clearCartDisplay();
     let table = document.createElement('table');

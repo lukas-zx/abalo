@@ -85,6 +85,10 @@ class AbArticleController extends Controller
                 ->where('ab_name', 'ilike', $article)
                 ->get();
         }
+        if($request['search']==''){
+            $articles = AbArticle::select()
+                ->get();
+        }
 
 
         foreach ($articles as $article) {
@@ -136,4 +140,10 @@ class AbArticleController extends Controller
             return response()->json($id);
         }
     }
+
+    public function newsite (){
+        return view('newsite');
+    }
 }
+
+

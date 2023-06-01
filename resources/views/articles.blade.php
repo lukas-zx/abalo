@@ -1,12 +1,12 @@
+<!-- Bilder laden und Warenkorb fehlen -->
+
 <!doctype html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Artikelübersicht</title>
     <script src="https://unpkg.com/vue@next"></script>
-    <script type="module">
-        import * as displayArticles from '/js/displayarticles.js';
-    </script>
+
     <style>
         img {
             width: 100px;
@@ -14,12 +14,21 @@
         }
     </style>
 </head>
+
+
 <body>
-<h1>Warenkorb</h1>
-<p id="p_cart"></p>
-<h1>Artikelübersicht</h1>
+<h1>Warenkorb:</h1>
+<p id="p_cart">
+
+</p>
 <div id="app">
-    <input type="text" v-model="searchvalue">
+    <h1>Artikelübersicht:</h1>
+    <div v-if="!searchValue" id="table-container">
+    <script src="{{asset('./js/displayarticles.js')}}"></script>
+    </div>
+<h1>Suche:</h1>
+    Suchbegriff:
+    <input type="text" v-model="searchValue" @input="loadArticles">
     <table>
         <thead>
         <tr>
@@ -32,36 +41,68 @@
             <td>Warenkorb</td>
         </tr>
         </thead>
-        <tbody v-if="searchvalue.length < 3">
+        <tbody>
+
+        <tr v-for="item in items" >
+            @{{ search }}
+            <td>@{{ item.ab_name }}</td>
+            <td >@{{item.ab_price}}</td>
+            <td >@{{item.ab_description}}</td>
+            <td >@{{item.ab_creator_id }}</td>
+            <td >@{{item.ab_createdate}}</td>
+            <td >@{{item.ab_image}}</td>
+            <td>
+                <img src="@{{ item.ab_image }}" alt="@{{ item.ab_image }}">
+            </td>
+            <td><button class="addToCart" id="@{{ item.id }}">+</button></td>
+        </tr>
         </tbody>
     </table>
 </div>
-<script>
+
+
+<script type="module">
+
     let appdata = {
-        searchvalue: ""
+        items : "",
+        search: "",
+        searchValue:""
     };
 
-    let vm = Vue.createApp({
-        data() {
-            return appdata;
-        }
+     let vm = Vue.createApp({
+         data() {
+             console.log(appdata)
+             return appdata;
+         },
+         methods: {
+             loadArticles() {
+
+                 if (this.searchValue.length > 2) {
+                     let xhr = new XMLHttpRequest();
+                     xhr.open('GET', '/api/article?search=' + this.$data.searchValue, true);
+                     xhr.setRequestHeader('Accept', 'application/json');
+
+                     xhr.onload = () => {
+                         if (xhr.readyState === 4) {
+                             if (xhr.status === 200) {
+                                 let json = JSON.parse(xhr.responseText);
+                                 if (json.length === 0) {
+                                     this.search = "Keine Suchergebnisse";
+                                 } else {
+                                     this.search = "Ergebnisse: "
+                                 }
+                                 this.items = json;
+                                 console.log(json);
+                             }
+
+                         }
+                     }
+                     xhr.send()
+                 }
+             },
+         }
     }).mount('#app');
 </script>
-<script src="{{ asset('/js/cart.js') }}"></script>
-<script>
-    let xhr = new XMLHttpRequest();
-    //let url = '/api/article/?search=' + searchvalue + '&limit=' + limit;
-    xhr.open('GET', '/api/article/?search=reifen&limit=2');
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.send();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            let
-            let items = JSON.parse(xhr.response);
-            items.forEach(function(value, key) {
-            })
-        }
-    }
-</script>
+<script src="{{ asset('./js/cart.js') }}"></script>
 </body>
 </html>

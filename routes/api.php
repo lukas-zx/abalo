@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::get('/newsite', [\App\Http\Controllers\AbArticleController::class, 'newsite']);
 Route::get('/article', [\App\Http\Controllers\AbArticleController::class, 'search_api']);
 Route::post('/article', [\App\Http\Controllers\AbArticleController::class, 'addArticle_api']);
 

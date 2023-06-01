@@ -24,13 +24,7 @@ class AbShoppingcartController extends Controller
     }
 
     function deleteItem_api(Request $request, int $cartid, int $articleid) {
-        /*
-        if(!DB::table('ab_shoppingcart_item')
-            ->where('ab_article_id', '=', $request['id'])
-            ->delete()
-        ) return response()->json('Fehler beim löschen');
-        else return response()->json('Löschen erfolgreich');
-        */
+
         if(!DB::table('ab_shoppingcart_item')
         ->where('ab_article_id', '=', $articleid)
         ->delete()) return response()->json('Fehler beim löschen');

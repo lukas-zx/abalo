@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/vue@next"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+    <button v-on:click="plus">+</button>
+    <button v-on:click="minus">-</button>
+    <div>{{count}}</div>
+</div>
+<script type="module">
+    let vm=Vue.createApp({
+        data(){
+            return{
+                count:1
+            };
+        },
+        methods:{
+            plus: function(){
+                this.$data.count++
+            },
+            minus: function (){
+                this.$data.count--
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ function findCookie(name) {
     return cookievalue;
 }
 
-cookies = findCookie('allowCookies');
+let cookies = findCookie('allowCookies');
 console.log(cookies);
 if (cookies === null || cookies === 'allowCookies=false') {
     const response = confirm('Allow Cookies?');

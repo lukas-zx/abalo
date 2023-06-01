@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'home']);
+Route::get('/newsite', [\App\Http\Controllers\AbArticleController::class, 'newsite']);
+
 
 Route::get('/testdata', [\App\Http\Controllers\AbTestDataController::class, 'getTestdata']);
 
