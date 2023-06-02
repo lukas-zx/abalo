@@ -30,3 +30,5 @@ Route::get('/newarticle', [\App\Http\Controllers\AbArticleController::class, 'ne
 
 Route::view('/3-ajax1-static', '3-ajax1-static' );
 Route::view('/3-ajax2-periodic', '/3-ajax2-periodic' );
+
+

@@ -1,11 +1,12 @@
 export default {
-    data: function () {
-        return {
-            showarea: false
-        }
+    data:function (){
+    return{
+        showarea:true
+    }
     },
-    template: '#impressum-templatetext-id'
+    template:'#sitebody-id'
 }
+
 
 
 

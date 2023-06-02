@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Newsite</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+   <!-- <script src="https://unpkg.com/vue@3.1.1/dist/vue.global.prod.js"></script>-->
     <script src="https://unpkg.com/vue@next"></script>
     <script src="{{ asset('/js/cookiecheck.js') }}"></script>
 </head>
 
 <body>
-<div id="app">
-<header>
+<div>
+    <header>
     <script type="text/x-template" id="siteheader-id"></script><div id="nav"></div>
     <script src="{{ asset('/js/navigation.js') }}"></script>
-
-</header>
-
-<script type="text/x-template" id="sitebody-id">
-
-</script>
-<h1>Warenkorb</h1>
-<script src="{{ asset('/js/cart.js') }}"></script>
-<h1>Artikel</h1>
-
-<h1>Neuen Artikel hinzufügen</h1>
-<script src="{{ asset('/js/newarticle.js') }}"></script>
+    </header>
 
 
-<div v-if="showarea">
 
-    <div>Max Mustermann (Vertretungsberechtigter)<br>
+    <h1>Warenkorb</h1>
+    <script src="{{ asset('/js/cart.js') }}"></script>
+    <h1>Artikel</h1>
+
+    <h1>Neuen Artikel hinzufügen</h1>
+    <script src="{{ asset('/js/newarticle.js') }}"></script>
+
+    <div id="app">
+        <sitebody></sitebody>
+    </div>
+    <div v-if="showarea">
+
+        Max Mustermann (Vertretungsberechtigter)<br>
         Abalo GmbH<br>
         Eupener Straße 70<br>
         52070 Aachen<br>
@@ -41,24 +42,38 @@
         Online-Streitbeilegungsplattform (OS-Plattform) errichtet. Verbraucher*innen
         können die Plattform zur außergerichtlichen Beilegung einer Streitigkeit aus
         Online-Verträgen mit einem in der EU niedergelassenen Unternehmen nutzen.
+
     </div>
+    <script type="text/x-template" id="sitebody-id">
+        <a v-on:click="showarea =!showarea"  href="">Impressum</a>
+    </script>
+    <footer id="footer">
+    <h1>Footer</h1>
+    </footer>
 </div>
 
-<footer id="footer">
-    <h1>Footer</h1>
-</footer>
-</div>
-<script type="text/x-template" id="impressum-templatetext-id">
-    <a v-on:click="showarea=!showarea" href="#">Impressum</a>
-</script>
 <script type="module">
-    import ImpressumText from "/public/js/impressum.js";
+    import siteheader from "/js/siteheader.js";
+    import sitebody from "/js/sitebody.js";
+    import sitefooter from "/js/sitefooter.js";
+    import impressum from "/js/siteheader.js";
 
     let vm = Vue.createApp({
         components: {
-            ImpressumText
-        }
+            siteheader,
+            sitebody,
+            sitefooter,
+            impressum
+        },
+
+
     }).mount('#app')
 </script>
 </body>
 </html>
+<script type="module">
+    import Sitebody from "/js/sitebody.js";
+    export default {
+        components: {Sitebody}
+    }
+</script>

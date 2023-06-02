@@ -1,6 +1,8 @@
+export default{
+    data:function(){
+        return{
 
-let vm = Vue.createApp({
-    components:{
-
-    }
-}).mount('#footer');
+        }
+    },
+    template: 'sitefooter-id'
+}

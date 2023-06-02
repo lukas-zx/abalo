@@ -75,3 +75,4 @@ nav.remove('Home');
 nav.addChild('Kategorien', 'Spielzeug');
 nav.removeChild('Unternehmen', 'Philosophie')
 nav.printNav();
+

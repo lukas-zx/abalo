@@ -39,6 +39,7 @@ description.setAttribute('rows', '10');
 description.setAttribute('cols', '30');
 description.required = true;
 
+
 let submit = document.createElement('button');
 submit.setAttribute('type', 'button');
 submit.innerText = 'Speichern';
@@ -84,7 +85,6 @@ function sendData(data){
 function sendData_api(data){
     let xhr = new XMLHttpRequest();
     xhr.open('POST','/api/article', true);
-    //xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Accept', 'application/json');
 
     let formData = new FormData();
