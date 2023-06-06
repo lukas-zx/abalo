@@ -1,9 +1,10 @@
+
 export default {
-    data: function (){
-        return {
+    data:function(){
+    return {
 
-
-        }
+    }
     },
-    template:`#siteheader-id`
+
+
 }
