@@ -1,35 +1,25 @@
 
-import sitefooter from "/js/sitefooter.js";
-import impressum from "/js/impressum.js";
+export default{
+    props:{
+        showimpressum:Boolean
+    },
 
-export default {
-  data(){
-       return {
-           //impressumVisible:false
-       }
-   },
-/*methods:{
-   /* owImpressum(){
-        this.impressumVisible=!this.impressumVisible;
-    }
+    template:
+       `<div v-if="showimpressum">
+       Max Mustermann (Vertretungsberechtigter)<br>
+       Abalo GmbH<br>
+       Eupener Straße 70<br>
+       52070 Aachen<br>
+       E-Mail: abalo@web.de<br>
+       Tel.:0212 4566788654 Kontaktdaten<br>
+       Umsatzsteuernummer: 012345
+       Streitbeilegungsplattform: <a href="http://ec.europa.eu/consumers/odr/\\" target="_blank\\">http://ec.europa.eu/consumers/odr/\\</a><br>
+       Die Europäische Kommission hat unter ec.europa.eu eine Europäische
+       Online-Streitbeilegungsplattform (OS-Plattform) errichtet. Verbraucher*innen
+       können die Plattform zur außergerichtlichen Beilegung einer Streitigkeit aus
+       Online-Verträgen mit einem in der EU niedergelassenen Unternehmen nutzen.
+        </div>
+        <div v-else>
+            Das ist der Body
+        </div>`,
 }
-props:['showImpressum'],
-components: {
-    sitefooter,
-    impressum
-
-},*/
-template:/*`<div v-if="showImpressum === 'impressum'">
-        <impressum v-if="showImpressum === 'impressum'"></impressum>
-        <impressum></impressum>
-</div>
-<div v-else>
-  <p>Das ist der Body</p>
-</div>
-<div>
-
-</div>`*/
-    `<sitebody></sitebody>`
-}
-
-

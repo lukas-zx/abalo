@@ -10,66 +10,45 @@
 <body>
 
     <div id="app">
-        <!--<siteheader></siteheader>
-        <sitebody ></sitebody>
-        <sitefooter></sitefooter>-->
-
-        <sitebody v-if="showImpressum === ''"></sitebody>
-        <impressum v-if="showImpressum === 'impressum'"></impressum>
-        <sitefooter :show-impressum="showImpressum" @update:show-impressum="showImpressum = $event"></sitefooter>
-
+        <site-header :navelements="navElements"></site-header>
+        <site-body :showimpressum="showImpressum"></site-body>
+        <site-footer @toggle-impressum="toggleImpressum"></site-footer>
     </div>
 
-  <!--  <script type="text/x-template" id="sitebody-id">
-        <div v-if="" id="impressum">
-
-            Max Mustermann (Vertretungsberechtigter)<br>
-            Abalo GmbH<br>
-            Eupener Straße 70<br>
-            52070 Aachen<br>
-            E-Mail: abalo@web.de<br>
-            Tel.:0212 4566788654 Kontaktdaten<br>
-            Umsatzsteuernummer: 012345
-            Streitbeilegungsplattform: <a href="http://ec.europa.eu/consumers/odr/\" target="_blank\">http://ec.europa.eu/consumers/odr/\</a><br>
-            Die Europäische Kommission hat unter ec.europa.eu eine Europäische
-            Online-Streitbeilegungsplattform (OS-Plattform) errichtet. Verbraucher*innen
-            können die Plattform zur außergerichtlichen Beilegung einer Streitigkeit aus
-            Online-Verträgen mit einem in der EU niedergelassenen Unternehmen nutzen.
-
-        </div>
-    </script>
-
-    <footer id="footer">
-    <script type="text/x-template" id="sitefooter-id"></script>
-    </footer>
-    -->
-
-
-<script type="module" type="application/javascript">
-    import siteheader from "/js/siteheader.js";
-    import sitebody from "/js/sitebody.js";
-    import sitefooter from "/js/sitefooter.js";
-    import impressum from "/js/impressum.js";
+<script type="module" >
+    import SiteHeader from "/js/siteheader.js";
+    import SiteBody from "/js/sitebody.js";
+    import SiteFooter from "/js/sitefooter.js";
 
     let vm = Vue.createApp({
+        data(){
+            return {
+                showImpressum:false,
+                navElements: [
+                    ['Home', null],
+                    ['Kategorien', null],
+                    ['Verkaufen', null],
+                    ['Unternehmen', ['Philosophie', 'Karriere']]
+                ]
+            }
+        },
         components: {
-            siteheader,
-            sitebody,
-            sitefooter,
-            impressum
+            SiteHeader,
+            SiteBody,
+            SiteFooter,
 
         },
+        methods:{
+            toggleImpressum(){
+                this.showImpressum = !this.showImpressum;
+                console.log(this.showImpressum);
 
+            }
+        },
 
-    }).mount('#app')
+    }).mount('#app');
+
 </script>
 </body>
 </html>
-<script type="module">
-    import Sitebody from "/js/sitebody.js";
-    import Siteheader from "/js/siteheader.js";
-    import Sitefooter from "/js/sitefooter.js";
-    export default {
-        components: {Sitefooter, Siteheader, Sitebody}
-    }
-</script>
+
