@@ -71,12 +71,7 @@ export default {
                 }
             }
 
-            let nav = new Navigation(this.navelements);
-            nav.append('Impressum');
-            nav.add(1, 'Test');
-            nav.remove('Home');
-            nav.addChild('Kategorien', 'Spielzeug');
-            nav.removeChild('Unternehmen', 'Philosophie')
+           let nav = new Navigation(this.navelements);
             nav.printNav();
 
         }

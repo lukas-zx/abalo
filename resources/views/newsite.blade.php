@@ -5,6 +5,12 @@
     <title>Newsite</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        img {
+            width: 100px;
+            height: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,6 +29,8 @@
     let vm = Vue.createApp({
         data(){
             return {
+                items : "",
+                search: "",
                 showImpressum:false,
                 navElements: [
                     ['Home', null],
@@ -36,16 +44,13 @@
             SiteHeader,
             SiteBody,
             SiteFooter,
-
         },
         methods:{
             toggleImpressum(){
                 this.showImpressum = !this.showImpressum;
                 console.log(this.showImpressum);
-
             }
         },
-
     }).mount('#app');
 
 </script>

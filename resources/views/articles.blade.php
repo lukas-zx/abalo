@@ -23,10 +23,9 @@
 </p>
 <div id="app">
     <h1>Artikelübersicht:</h1>
-    <div v-if="!searchValue" id="table-container">
-    <script src="{{asset('./js/displayarticles.js')}}"></script>
-    </div>
-<h1>Suche:</h1>
+
+
+    <h2>Suche:</h2>
     Suchbegriff:
     <input type="text" v-model="searchValue" @input="loadArticles">
     <table>
@@ -50,9 +49,8 @@
             <td >@{{item.ab_description}}</td>
             <td >@{{item.ab_creator_id }}</td>
             <td >@{{item.ab_createdate}}</td>
-            <td >@{{item.ab_image}}</td>
             <td>
-                <img src="@{{ item.ab_image }}" alt="@{{ item.ab_image }}">
+                <img :src="item.ab_image" :alt="item.ab_image">
             </td>
             <td><button class="addToCart" id="@{{ item.id }}">+</button></td>
         </tr>
@@ -66,7 +64,8 @@
     let appdata = {
         items : "",
         search: "",
-        searchValue:""
+        searchValue:"",
+        default_url:'/api/article?search='
     };
 
      let vm = Vue.createApp({
@@ -74,31 +73,40 @@
              console.log(appdata)
              return appdata;
          },
+         mounted(){
+             this.loadArticles();
+         },
          methods: {
              loadArticles() {
+                 // url reset
+                 let url = this.default_url;
 
+                 // Ab 3 Zeichen nach searchvalue filtern
                  if (this.searchValue.length > 2) {
-                     let xhr = new XMLHttpRequest();
-                     xhr.open('GET', '/api/article?search=' + this.$data.searchValue, true);
-                     xhr.setRequestHeader('Accept', 'application/json');
+                     url += this.searchValue;
+                     console.log(url);
+                 }
 
-                     xhr.onload = () => {
-                         if (xhr.readyState === 4) {
-                             if (xhr.status === 200) {
-                                 let json = JSON.parse(xhr.responseText);
-                                 if (json.length === 0) {
-                                     this.search = "Keine Suchergebnisse";
-                                 } else {
-                                     this.search = "Ergebnisse: "
-                                 }
-                                 this.items = json;
-                                 console.log(json);
+                 // Artikel laden
+                 let xhr = new XMLHttpRequest();
+                 xhr.open('GET', url, true);
+                 xhr.setRequestHeader('Accept', 'application/json');
+
+                 xhr.onload = () => {
+                     if (xhr.readyState === 4) {
+                         if (xhr.status === 200) {
+                             let json = JSON.parse(xhr.responseText);
+                             if (json.length === 0) {
+                                 this.search = "Keine Suchergebnisse";
+                             } else {
+                                 this.search = "Ergebnisse: "
                              }
-
+                             this.items = json;
+                             console.log(json);
                          }
                      }
-                     xhr.send()
                  }
+                 xhr.send();
              },
          }
     }).mount('#app');

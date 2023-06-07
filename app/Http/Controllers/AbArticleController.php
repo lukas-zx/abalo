@@ -75,18 +75,16 @@ class AbArticleController extends Controller
         $article = $request['search'];
         $article = strtolower($article);
         $article = '%' . $article . '%';
-        if (isset($request['limit'])) {
+        if($request['search'] === '' || strlen($request['search']) < 3){
             $articles = AbArticle::select()
-                ->where('ab_name', 'ilike', $article)
+                ->offset($request['offset'])
                 ->limit($request['limit'])
                 ->get();
         } else {
             $articles = AbArticle::select()
                 ->where('ab_name', 'ilike', $article)
-                ->get();
-        }
-        if($request['search']==''){
-            $articles = AbArticle::select()
+                ->offset($request['offset'])
+                ->limit($request['limit'])
                 ->get();
         }
 
