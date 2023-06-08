@@ -7,7 +7,6 @@ export default {
     },
     methods:{
         createMenu(){
-
             function Navigation(navelements) {
                 this.navelements = navelements;
 

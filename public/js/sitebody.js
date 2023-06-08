@@ -1,4 +1,8 @@
+import Impressum from '/js/impressum.js'
 export default{
+    components: {
+        Impressum
+    },
     props:{
         showimpressum:Boolean,
     },
@@ -9,8 +13,8 @@ export default{
             limit:5,
             offset:0,
             pagesize:5,
-            items:"",
-            shoppingcart:"",
+            items:[],
+            shoppingcart:[],
             default_url:""
         }
     },
@@ -70,8 +74,10 @@ export default{
             this.refreshShoppingCart();
         },
         removeFromCart(id) {
+
             let xhr = new XMLHttpRequest();
             let url = '/api/shoppingcart/1/articles/' + id;
+
             xhr.open('DELETE', url, true);
             xhr.setRequestHeader('Accept', 'application/json');
             xhr.send();
@@ -91,18 +97,17 @@ export default{
             let xhr = new XMLHttpRequest();
             xhr.open('GET', '/api/shoppingcart', true);
             xhr.setRequestHeader('Accept', 'application/json');
-            xhr.send();
 
-            xhr.onreadystatechange = function() {
+            xhr.onload = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        this.shoppingcart = JSON.parse(xhr.responseText);
+                        let json = JSON.parse(xhr.responseText);
+                        this.shoppingcart = json;
                         console.log(this.shoppingcart);
-                    } else {
-                        console.log(xhr.statusText);
                     }
                 }
             }
+            xhr.send();
         },
         nextPage() {
             this.offset += this.pagesize;
@@ -118,18 +123,7 @@ export default{
 
     template:
        `<div v-if="showimpressum">
-           Max Mustermann (Vertretungsberechtigter)<br>
-           Abalo GmbH<br>
-           Eupener Straße 70<br>
-           52070 Aachen<br>
-           E-Mail: abalo@web.de<br>
-           Tel.:0212 4566788654 Kontaktdaten<br>
-           Umsatzsteuernummer: 012345
-           Streitbeilegungsplattform: <a href="http://ec.europa.eu/consumers/odr/\\" target="_blank\\">http://ec.europa.eu/consumers/odr/\\</a><br>
-           Die Europäische Kommission hat unter ec.europa.eu eine Europäische
-           Online-Streitbeilegungsplattform (OS-Plattform) errichtet. Verbraucher*innen
-           können die Plattform zur außergerichtlichen Beilegung einer Streitigkeit aus
-           Online-Verträgen mit einem in der EU niedergelassenen Unternehmen nutzen.
+           <impressum></impressum>
        </div>
        <div v-else>
             <h1>Warenkorb:</h1>

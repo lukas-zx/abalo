@@ -75,7 +75,7 @@ class AbArticleController extends Controller
         $article = $request['search'];
         $article = strtolower($article);
         $article = '%' . $article . '%';
-        if($request['search'] === '' || strlen($request['search']) < 3){
+        if(strlen($request['search']) < 3){
             $articles = AbArticle::select()
                 ->offset($request['offset'])
                 ->limit($request['limit'])
