@@ -8,7 +8,6 @@ form.setAttribute('id', 'form');
 let nameLabel = document.createElement('label');
 nameLabel.setAttribute('for', 'name');
 nameLabel.innerText = 'Name';
-
 let name = document.createElement('input');
 name.setAttribute('type', 'text');
 name.setAttribute('id', 'name');

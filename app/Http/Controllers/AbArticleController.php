@@ -76,10 +76,12 @@ class AbArticleController extends Controller
         $article = strtolower($article);
         $article = '%' . $article . '%';
         if(strlen($request['search']) < 3){
+
             $articles = AbArticle::select()
                 ->offset($request['offset'])
                 ->limit($request['limit'])
                 ->get();
+
         } else {
             $articles = AbArticle::select()
                 ->where('ab_name', 'ilike', $article)
@@ -88,6 +90,11 @@ class AbArticleController extends Controller
                 ->get();
         }
 
+        $articlesNoLimit = AbArticle::select()
+            ->where('ab_name', 'ilike', $article)
+            ->get();
+
+        $articleCount = count($articlesNoLimit);
 
         foreach ($articles as $article) {
             $article['ab_image'] = 'no image';
@@ -102,9 +109,10 @@ class AbArticleController extends Controller
 
         $data = [
             'articles' => $articles,
+            'articleCount' => $articleCount
         ];
 
-        return response()->json($articles);
+        return response()->json($data);
     }
 
     function addArticle_api(Request $request) {

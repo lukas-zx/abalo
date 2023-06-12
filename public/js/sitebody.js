@@ -15,7 +15,9 @@ export default{
             pagesize:5,
             items:[],
             shoppingcart:[],
-            default_url:""
+            default_url:"",
+            articleCount:0,
+
         }
     },
     mounted() {
@@ -41,17 +43,21 @@ export default{
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         let json = JSON.parse(xhr.responseText);
+                        this.articleCount = json.articleCount;
                         if (json.length === 0) {
                             this.search = "Keine Suchergebnisse";
                         } else {
                             this.search = "Ergebnisse: "
                         }
-                        this.items = json;
+                        this.items = json.articles;
                         console.log(json);
+
                     }
                 }
             }
             xhr.send();
+
+
         },
         addToCart(id) {
             let xhr = new XMLHttpRequest();
@@ -187,8 +193,8 @@ export default{
                 </tr>
                 </tbody>
             </table>
-            <button @click="prevPage">Vorherige Seite</button>
-            {{offset / 5 + 1}}
-            <button @click="nextPage">Nächste Seite</button>
+            <button @click="prevPage" v-if="this.offset > 0">Zurück</button>
+            Seite {{offset / 5 + 1}} von {{ Math.ceil(this.articleCount / this.limit) }}
+            <button @click="nextPage" v-if="this.articleCount > this.offset + this.limit">Vor</button>
        </div>`,
 }
